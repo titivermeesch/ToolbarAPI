@@ -1,0 +1,29 @@
+name: Publish new release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - run: gradle :jar
+      - uses: actions/upload-artifact@v2
+        with:
+          path: build/libs/toolbarapi.jar
+  Release:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+      - run: echo "PACKAGE_VERSION=$(./scripts/get-version.sh)" >> $GITHUB_ENV
+      - run: gh release create ${{ env.PACKAGE_VERSION }} -t ${{ env.PACKAGE_VERSION }} artifact/*.jar
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
