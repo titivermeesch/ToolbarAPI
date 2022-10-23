@@ -4,6 +4,7 @@ plugins {
 
 group = 'me.playbosswar'
 version = '1.0.0'
+jar.archiveName = 'toolbarapi.jar';
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
