@@ -1,5 +1,7 @@
 # ToolbarAPI
 
+[![](https://jitpack.io/v/titivermeesch/ToolbarAPI.svg)](https://jitpack.io/#titivermeesch/ToolbarAPI)
+
 **THIS IS NOT A SPIGOT PLUGIN, ONLY INSTALL IT IF YOU ARE A DEVELOPER OR YOU USE A PLUGIN THAT DEPEND ON THIS**
 
 ToolbarAPI is an API created to help developers set up toolbar menus without having to create complex inventory
@@ -7,6 +9,39 @@ listeners.
 
 ToolbarAPI can register multiple toolbars at the same time, and players can have different toolbars open at the same
 time
+
+## Installation
+
+### Gradle
+
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.titivermeesch:ToolbarAPI:1.0.0'
+}
+```
+
+### Maven
+
+```xml
+
+<project>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <dependency>
+        <groupId>com.github.titivermeesch</groupId>
+        <artifactId>ToolbarAPI</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</project>
+```
 
 ## Usage
 
@@ -21,7 +56,7 @@ class Main {
         ItemStack compass = new ItemStack(Material.COMPASS);
         ClickableItem clickableCompass = new ClickableItem(compass, e -> e.getPlayer().sendMessage("You clicked the compass!"));
         toolbar.addItem(0, clickableCompass);
-        
+
         // Register the freshly created toolbar
         toolbarManager.addToolbar(toolbar);
     }
@@ -30,11 +65,11 @@ class Main {
 // This example shows a toolbar activated in the join event, but it could be triggered by anything
 class JoinListeners implements Listeners {
     private final ToolbarManager toolbarManager = Main.getInstance().getToolbarManager();
-    
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
 
-      toolbarManager.setToolbar(e.getPlayer(), "my_toolbar");
+        toolbarManager.setToolbar(e.getPlayer(), "my_toolbar");
     }
 }
 ```
