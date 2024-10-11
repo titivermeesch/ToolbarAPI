@@ -81,6 +81,14 @@ Here are a few points that may be useful if you try to debug something or if you
 - The plugin registers a listener when you initiate your `ToolbarManager`. This listener will take care of triggering
   the correct execution
 
+## Building
+
+```shell
+gradle :jar
+```
+
+The jar file will be available under build/libs
+
 ## Contributing
 
 Feel free to create a ticket about a feature you would like to see, or create a PR to implement something new.
